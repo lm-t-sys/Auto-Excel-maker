@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="ja">
+  <head>
+    <meta charset="UTF-8">
+    <title>Auto Excel Form</title>
+    <link rel="stylesheet" href= "{{url_for('static',filename='css/stylesheet.css')}}" >
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+  </head>
+  <body>
+<form class="box" action="/" method="POST">
+  <h4>excel自動作成</h4>
+  <input type="text" name="indexs" placeholder="例:生徒1,生徒2,生徒3">
+  <input type="text" required name="columns" placeholder="例:国語,数学,英語,理科,社会">
+  <textarea rows=6 required name='values' placeholder="コンマ(',')区切りで入力して下さい."></textarea>
+  <input type="submit" name="Go" required placeholder="実行">
+</form>
+{{posts}}<br>
+<a href="{{url_for('static',filename='css/excelfolder/to_csv.xlsx')}}" download='post.xlsx'>上の表をダウンロード</a>
+
+  </body>
+</html>
+
+
