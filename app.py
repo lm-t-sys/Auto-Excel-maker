@@ -3,7 +3,7 @@
 from flask import Flask,render_template,request,redirect,url_for
 import pandas as pd
 import numpy as np
-import matplotlib as plt
+import matplotlib.pyplot as plt
 from IPython.display import HTML
 
 app=Flask(__name__)
@@ -18,6 +18,18 @@ def index():
         a=request.form.get('indexs')
         b=request.form.get('columns')
         c=request.form.get('values')
+        btn1=request.form.get('btn1')
+        btn2=request.form.get('btn2')
+        btn1=btn2.strip()
+        btn2=btn2.strip()
+        if btn1=='':
+            btn1='0'
+        if btn2=='':
+            btn2='0'
+            
+        on=False
+        if int(btn2)>=1:
+            on=True        
         a2=a.split(',')
         b2=b.split(",")
         a3,b3=[],[]
@@ -28,27 +40,40 @@ def index():
                 a3.append(aa)
 
         for bb in b2:
-            b3.append(bb) 
+            if a.strip()=="":
+                break
+            else:
+                b3.append(bb) 
         f=[] 
 
         d=c.strip().split(",") 
         for i in d:
             f.append(i)    
-        f=np.array(f)
+        f=np.array(f) 
         a3_size=len(a3)
         b3_size=len(b3)
-        if b3_size>1:
-            f=np.array(f).reshape(int(f.size/b3_size),b3_size)     
+        if on==True:
+            f=np.array(f).reshape(int(f.size/int(btn2)),int(btn2)) 
+        elif b3_size>=1 and on==False:
+            f=np.array(f).reshape(int(f.size/b3_size),b3_size) 
         else:
-            f=np.array(f)                                
-        if a3_size<1:
+            f=np.array(f) 
+
+        if a3_size<1 and b3_size<1:
+            c2=pd.DataFrame(f,columns=None,index=None)
+        elif b3_size>0 and a3_size<1:
             c2=pd.DataFrame(f,columns=b3,index=None)
         else:
-            c2=pd.DataFrame(f,columns=b3,index=a3)              
-                    
-        ANS=HTML(c2.to_html(classes='table table-striped'))
+            c2=pd.DataFrame(f,columns=b3,index=a3)  
+        if a3_size<1 and b3_size<1:
+            c2.to_excel('static/css/excelfolder/to_csv.xlsx',index=False,header=False)
+        elif a3_size<1:
+            c2.to_excel('static/css/excelfolder/to_csv.xlsx',index=False)
+        else:
+            c2.to_excel('static/css/excelfolder/to_csv.xlsx') 
 
-        c2.to_excel("templates/excelfolder/to_csv.xlsx")
+
+        ANS=HTML(c2.to_html(classes='table table-striped'))
 
                
         return render_template('index.html',posts=ANS)

@@ -10,14 +10,26 @@
   </head>
   <body>
 <form class="box" action="/" method="POST">
-  <h4>excel自動作成</h4>
+  <h4>excel自動作成(列基準)</h4>
   <input type="text" name="indexs" placeholder="例:生徒1,生徒2,生徒3">
-  <input type="text" required name="columns" placeholder="例:国語,数学,英語,理科,社会">
+  <input type="text" name="columns" placeholder="例:国語,数学,英語,理科,社会">
+  
+    この欄のみ必須です
+  
   <textarea rows=6 required name='values' placeholder="コンマ(',')区切りで入力して下さい."></textarea>
+  <h5>行と列を指定できます(任意)</h5>
+  
+  <input type="text" name="btn1" placeholder="行(任意)例:2">
+  <input type="text" name="btn2" placeholder="列 例:3">
+  
   <input type="submit" name="Go" required placeholder="実行">
+
+  <div class='forms'>
+    {{posts}}<br>
+    </div>
+    <a href="{{url_for('static',filename='css/excelfolder/to_csv.xlsx')}}" download='post.xlsx'>上の表をダウンロード</a>
 </form>
-{{posts}}<br>
-<a href="{{url_for('static',filename='css/excelfolder/to_csv.xlsx')}}" download='post.xlsx'>上の表をダウンロード</a>
+
 
   </body>
 </html>

@@ -1,23 +1,33 @@
 body{
-  margin:0;
-  padding : 0;
+  
+  margin:10px;
+  padding : 30px;
+  height :auto;
+  overflow-y: scroll;
   font-family: sans-serif;
   background:#cefadb;
+  
 }
+
 .box{
-  width:Auto;
+  size: auto,700px;
   padding:20%;
-  position: absolute;
-  top: 50%;
-  left: 50%;
+  margin:100px;
+  
+  overflow:auto;
+  
   transform: translate(-50%,-50%);
   background: #fcf9f9;
-  text-align: center;
+  text-align:center;
   border-top:20% solid red;
   border-bottom:5px solid red;
 }
 .box textarea{
   size:100px,300px;
+}
+.box .nyu {
+  background: cadetblue;
+  border-color: red; 
 }
 .box input[type='text'],.box textarea{
   border : 3px solid #036d09;
@@ -41,4 +51,9 @@ border:1px solid black;
 .box input[type=submit]:hover{
   cursor: pointer;
 }
+.forms {
+  background-color: rgb(97, 248, 9);
+
+}
+
 
